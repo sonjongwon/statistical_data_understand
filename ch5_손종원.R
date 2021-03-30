@@ -27,9 +27,11 @@ x
 head(transform(iris, Log.Sepal.Length = log(Sepal.Length)))
 
 # transform() 함수 이용하여 변수 변경
+
 head(transform(iris, Sepal.Length = -Sepal.Length))
 
 # apply
+
 sum(1:10)
 d = matrix(1:9, ncol = 3)
 d
@@ -55,6 +57,7 @@ d
 data.frame(do.call(cbind, lapply(iris[, 1:4], mean)))
 
 # sapply
+
 lapply(iris[, 1:4], mean)
 sapply(iris[, 1:4], mean)
 class(sapply(iris[, 1:4], mean))
@@ -78,6 +81,7 @@ class(y)
 head(y)
 
 # tapply
+
 tapply(1:10, rep(1,10), sum)
 tapply(1:10, 1:10 %% 2 == 1, sum)
 iris
@@ -87,3 +91,53 @@ m = matrix(1:8, ncol =2,
                              "fall", "winter"),
                            c("male", "female")))
 m
+
+tapply(m, list(c(1, 1, 2, 2, 1, 1, 2, 2),
+               c(1, 1, 1, 1, 2, 2, 2, 2)), sum)
+
+# mapply()
+
+mapply(rnorm, c(1, 2, 3),
+       c(0, 10, 100),
+       c(1, 1, 1))
+mapply(mean, iris[, 1:4])
+
+# 데이터를 그룹으로 묶은 후 함수 호출
+
+library(doBy)
+
+# summary()
+
+summary(iris)
+
+# quantile()
+
+quantile(iris$Sepal.Length)
+quantile(iris$Sepal.Length, seq(0, 1, by=0.1))
+
+# summaryBy()
+
+summaryBy(Sepal.Width + Sepal.Length ~ Species, iris)
+
+# order()
+
+order(iris$Sepal.Width)
+iris[order(iris$Sepal.Width),]
+iris[order(iris$Sepal.Length, iris$Sepal.Width),]
+
+# orderBy()
+
+orderBy(~Sepal.Width, iris)
+orderBy(~Species + Sepal.Width, iris)
+
+# sample()
+
+sample(1:10, 5)
+sample(1:10, 5, replace = T)
+
+sample(1:10, 10)
+iris[sample(NROW(iris), NROW(iris)),]
+
+# sampleBy()
+
+sampleBy(~Species, frac = 0.1, data = iris)
