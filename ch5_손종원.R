@@ -1,6 +1,7 @@
 # iris data
 
-head(iris)
+iris
+head(iris)  # head()는 앞에 데이터 6개만 보여줌
 str(iris)
 library(help = datasets)
 
@@ -83,10 +84,11 @@ head(y)
 # tapply
 
 tapply(1:10, rep(1,10), sum)
+tapply(1:10, rep(2,10), sum)
 tapply(1:10, 1:10 %% 2 == 1, sum)
 iris
 tapply(iris$Sepal.Length, iris$Species, mean)
-m = matrix(1:8, ncol =2,
+m = matrix(1:8, ncol = 2,
            dimnames = list(c("spring", "summer",
                              "fall", "winter"),
                            c("male", "female")))
@@ -101,6 +103,7 @@ mapply(rnorm, c(1, 2, 3),
        c(0, 10, 100),
        c(1, 1, 1))
 mapply(mean, iris[, 1:4])
+apply(iris[, 1:4], 2, mean)
 
 # 데이터를 그룹으로 묶은 후 함수 호출
 
@@ -128,6 +131,7 @@ iris[order(iris$Sepal.Length, iris$Sepal.Width),]
 # orderBy()
 
 orderBy(~Sepal.Width, iris)
+orderBy(~-Sepal.Width, iris)
 orderBy(~Species + Sepal.Width, iris)
 
 # sample()
@@ -136,7 +140,7 @@ sample(1:10, 5)
 sample(1:10, 5, replace = T)
 
 sample(1:10, 10)
-iris[sample(NROW(iris), NROW(iris)),]
+(iris[sample(NROW(iris), NROW(iris)),])
 
 # sampleBy()
 
